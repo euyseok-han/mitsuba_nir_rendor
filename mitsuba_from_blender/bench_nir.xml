@@ -1,0 +1,55 @@
+<scene version="2.1.0">
+
+<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+	<default name="spp" value="10"/>
+	<default name="resx" value="1024"/>
+	<default name="resy" value="1024"/>
+<!-- Camera and Rendering Parameters -->
+
+	<integrator type="path" id="elm__0" name="elm__0">
+		<integer name="max_depth" value="12"/>
+	</integrator>
+	<sensor type="perspective" id="elm__2" name="elm__2">
+		<film type="specfilm">
+			<rfilter type="box"/>
+			<string name="component_format" value="float16"/>   
+			<spectrum name="band0" filename="nir.spd"/>
+			<integer name="width" value="$resx"/>
+			<integer name="height" value="$resy"/>
+		</film>
+	</sensor>
+
+<!-- Materials -->
+
+	<bsdf type="twosided" id="mat-01___Default" name="mat-01___Default">
+		<bsdf type="diffuse" name="bsdf">
+			<spectrum name="reflectance" value="900:0.5, 1000:0.7"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-01___Default2" name="mat-01___Default2">
+		<bsdf type="diffuse" name="bsdf" >
+				<spectrum name="reflectance" value="900:0.1, 1000:0.15"/>
+		</bsdf>
+	</bsdf>
+
+<!-- Emitters -->
+
+	<emitter type="constant">
+		<spectrum name="radiance" value="900:0.03, 1000:0.08"/>
+	</emitter>
+
+<!-- Shapes -->
+
+	<shape type="ply" id="elm__3" name="elm__3">
+		<string name="filename" value="meshes/10543_Weightlifting_bench_SG_v1_it2.ply"/>
+		<ref id="mat-01___Default" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__4" name="elm__4">
+		<string name="filename" value="meshes/10543_Weightlifting_bench_SG_v1_it2_003.ply"/>
+		<ref id="mat-01___Default2" name="bsdf"/>
+	</shape>
+
+<!-- Volumes -->
+
+</scene>

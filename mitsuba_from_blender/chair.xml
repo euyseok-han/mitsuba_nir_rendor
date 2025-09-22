@@ -1,0 +1,132 @@
+	<scene version="2.1.0">
+
+	<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+		<default name="spp" value="250"/>
+		<default name="resx" value="800"/>
+		<default name="resy" value="800"/>
+
+	<!-- Camera and Rendering Parameters -->
+
+		<integrator type="path" id="elm__0" name="elm__0">
+			<integer name="max_depth" value="2"/>
+		</integrator>
+		<sensor type="perspective" id="elm__17" name="elm__17">
+			<string name="fov_axis" value="x"/>
+			<float name="fov" value="39.597755"/>
+			<float name="principal_point_offset_x" value="0.000000"/>
+			<float name="principal_point_offset_y" value="-0.000000"/>
+			<float name="near_clip" value="0.100000"/>
+			<float name="far_clip" value="1000.000000"/>
+			<transform name="to_world">
+				<rotate x="1" angle="7.125016419970467"/>
+				<rotate y="1" angle="-4.970276107827744e-06"/>
+				<rotate z="1" angle="-6.21284513478468e-07"/>
+				<translate value="0.000000 0.500000 -4.000000"/>
+			</transform>
+			<sampler type="independent" name="sampler">
+				<integer name="sample_count" value="$spp"/>
+			</sampler>
+			<film type="hdrfilm" name="film">
+				<integer name="width" value="$resx"/>
+				<integer name="height" value="$resy"/>
+				<rfilter type="gaussian" name="rfilter">
+					<float name="stddev" value="1.500000"/>
+				</rfilter>
+			</film>
+		</sensor>
+
+	<!-- Materials -->
+
+		<bsdf type="twosided" id="mat-1D_METAL" name="mat-1D_METAL">
+			<bsdf type="roughconductor" name="bsdf">
+				<float name="alpha" value="0.100000"/>
+				<string name="distribution" value="beckmann"/>
+				<rgb value="0.485150 0.327778 0.181164" name="specular_reflectance"/>
+			</bsdf>
+		</bsdf>
+		<bsdf type="twosided" id="mat-1D_ROPE" name="mat-1D_ROPE">
+			<bsdf type="diffuse" name="bsdf">
+				<rgb value="0.800000 0.800000 0.800000" name="reflectance"/>
+			</bsdf>
+		</bsdf>
+		<bsdf type="twosided" id="mat-1D_MAINWHITE" name="mat-1D_MAINWHITE">
+			<bsdf type="diffuse" name="bsdf">
+				<rgb value="1.000000 0.971716 0.886863" name="reflectance"/>
+			</bsdf>
+		</bsdf>
+		<bsdf type="diffuse" id="mat-1D_Cloth" name="mat-1D_Cloth">
+			<rgb value="1.000000 0.000000 0.300000" name="reflectance"/>
+		</bsdf>
+
+	<!-- Emitters -->
+
+		<emitter type="envmap" id="elm__1" name="elm__1">
+			<string name="filename" value="textures/interior.001.exr"/>
+			<float name="scale" value="0.800000"/>
+			<transform name="to_world">
+				<matrix value="0.000000 0.000000 1.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000"/>
+			</transform>
+		</emitter>
+
+	<!-- Shapes -->
+
+		<shape type="ply" id="elm__3" name="elm__3">
+			<string name="filename" value="meshes/1DC_F1.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_METAL" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__5" name="elm__5">
+			<string name="filename" value="meshes/1DC_Wire4.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_ROPE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__7" name="elm__7">
+			<string name="filename" value="meshes/1DC_WF.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_MAINWHITE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__8" name="elm__8">
+			<string name="filename" value="meshes/1DC_Cap.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_MAINWHITE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__9" name="elm__9">
+			<string name="filename" value="meshes/1DC_Wire2.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_ROPE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__10" name="elm__10">
+			<string name="filename" value="meshes/1DC_Wire3.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_ROPE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__11" name="elm__11">
+			<string name="filename" value="meshes/1DC_Wire1.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_ROPE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__12" name="elm__12">
+			<string name="filename" value="meshes/1DC_Wire.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_ROPE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__13" name="elm__13">
+			<string name="filename" value="meshes/1DC_W.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_MAINWHITE" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__15" name="elm__15">
+			<string name="filename" value="meshes/1DC_Cloth.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_Cloth" name="bsdf"/>
+		</shape>
+		<shape type="ply" id="elm__16" name="elm__16">
+			<string name="filename" value="meshes/1DC_F.ply"/>
+			<boolean name="face_normals" value="true"/>
+			<ref id="mat-1D_METAL" name="bsdf"/>
+		</shape>
+
+	<!-- Volumes -->
+
+	</scene>
